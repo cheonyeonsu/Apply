@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout1}">
+
+<th:block layout:fragment="css">
+
+</th:block>
+
+<div layout:fragment="content" class="content">
+	<!-- Main Content-->
+	<main class="mb-4">
+		<div class="container px-4 px-lg-5">
+			<div class="row gx-4 gx-lg-5 justify-content-center">
+				<div class="col-md-10 col-lg-8 col-xl-7">
+					<div class="my-5">
+						<form id="contactForm" action="/members/login" method="post">
+							
+							<div class="form-floating">
+								<input class="form-control" id="userId" name="userId" type="text"
+									placeholder="아이디를 입력하세요." data-sb-validations="required" /> <label
+									for="userId">ID</label>
+								
+						</div>
+						<div class="form-floating">
+								<input class="form-control" id="password" name="password" type="text"
+									placeholder="비밀번호를 입력하세요." data-sb-validations="required" /> <label
+									for="password">PASSWORD</label>
+								
+							<br />		
+							</div>
+					<p th:if="${loginErrorMsg}" class="error"
+										th:text="${loginErrorMsg}"></p>
+							<!-- Submit Button-->
+					
+						<button class="btn btn-primary text-uppercase" id="submitButton" type="submit">로그인</button>
+						<button class="btn btn-primary text-uppercase" id="submitButton" type="button" onclick="locateRegist()">회원가입</button>
+						<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+							
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+</div>
+
+
+<!-- 각 페이지의 스크립트가 작성될 위치 -->
+<th:block layout:fragment="script">
+	<script th:inline="javascript">
+		//회원가입이 실패했을 때
+	/* var errorMessage = [[${errorMessage}]];
+		  
+	if(errorMessage != null){
+		alert(errorMessage);
+	}  */
+	
+	 function locateRegist() {
+		 location.href = '/members/new'
+	 }
+	</script>
+</th:block>
+</html>
