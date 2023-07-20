@@ -68,7 +68,7 @@ public class SubjectRepositoryCustomImpl implements SubjectRepositoryCustom{
 						  subject.subjectName,
 						  subject.subjectStartDate, 
 						  subject.subjectEndDate, 
-						  subject.subjectdetail, 
+						  subject.subjectDetail, 
 						  subject.subjectTo))
 				  .from(subject)
 				  .where(regDtsAfter(subjectSearchDto.getSearchDateType()),
