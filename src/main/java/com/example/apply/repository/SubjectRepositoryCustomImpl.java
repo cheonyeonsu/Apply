@@ -18,19 +18,18 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 
 import jakarta.persistence.EntityManager;
 
+public class SubjectRepositoryCustomImpl implements SubjectRepositoryCustom {
 
-public class SubjectRepositoryCustomImpl implements SubjectRepositoryCustom{
-	
-	//공식이니라
+	// 공식이니라
 	private JPAQueryFactory queryFactory;
-	
+
 	public SubjectRepositoryCustomImpl(EntityManager em) {
 		this.queryFactory = new JPAQueryFactory(em);
 	}
-	
+
 	// 현재 날짜로부터 이전날짜를 구해주는 메소드 <날짜 검색>
 	private BooleanExpression regDtsAfter(String searchDateType) {
-		
+
 		LocalDateTime dateTime = LocalDateTime.now(); // 현재 날짜, 시간
 
 		if (StringUtils.equals("all", searchDateType) || searchDateType == null)
@@ -45,12 +44,11 @@ public class SubjectRepositoryCustomImpl implements SubjectRepositoryCustom{
 			dateTime = dateTime.minusMonths(6); // 현재 날짜로부터 6개월 전
 
 		return QSubject.subject.subjectStartDate.after(dateTime); // Q객체 리턴
-		
+
 	}
-	
+
 	private BooleanExpression subjectNmLike(String searchQuery) {
-		return StringUtils.isEmpty(searchQuery)? 
-				null : QSubject.subject.subjectName.like("%" + searchQuery + "%"); 
+		return StringUtils.isEmpty(searchQuery) ? null : QSubject.subject.subjectName.like("%" + searchQuery + "%");
 	}
 
 	@Override
@@ -62,7 +60,7 @@ public class SubjectRepositoryCustomImpl implements SubjectRepositoryCustom{
 		
 		QSubject subject = QSubject.subject;
 
-		  List<SubjectDto> content = queryFactory.select(
+	  List<SubjectDto> content = queryFactory.select(
 				  new QSubjectDto(
 						  subject.subjectId, 
 						  subject.subjectName,
@@ -72,7 +70,7 @@ public class SubjectRepositoryCustomImpl implements SubjectRepositoryCustom{
 						  subject.subjectTo))
 				  .from(subject)
 				  .where(regDtsAfter(subjectSearchDto.getSearchDateType()),
-						  subjectNmLike(subjectSearchDto.getSearchQuery()))
+					  subjectNmLike(subjectSearchDto.getSearchQuery()))
 				  .orderBy(subject.subjectId.desc())
 				  //의미는 없는데 같이 써줘야 하는 아이들. 
 				  .offset(pageable.getOffset())
@@ -85,11 +83,10 @@ public class SubjectRepositoryCustomImpl implements SubjectRepositoryCustom{
 				  .from(subject)
 				  .where(regDtsAfter(subjectSearchDto.getSearchDateType()),
 						  subjectNmLike(subjectSearchDto.getSearchQuery()))
-				  .fetchOne();
+			  .fetchOne();
 
-		  return new PageImpl<>(content,pageable,total);
+		  return new PageImpl<>(content,pageable,total); 
+		
 	}
 
 }
-
-
