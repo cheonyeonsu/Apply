@@ -21,7 +21,7 @@ public class ApplyController {
 
 	private final SubjectService subjectService; //의존성 줌
 	
-	@GetMapping(value="/apply/new", "/apply/new/{page}") //경로
+	@GetMapping(value="/apply/new") //경로 "/apply/new/{page}"
 	public String applyForm(Model model, SubjectSearchDto subjectSearchDto, Optional<Integer> page ) {
 		Pageable pageable = PageRequest.of(page.isPresent()?page.get():0, 5); 
 		Page<SubjectDto> subjects = subjectService.getApplyPage(subjectSearchDto, pageable);
@@ -35,3 +35,5 @@ public class ApplyController {
 	
 	
 }
+
+

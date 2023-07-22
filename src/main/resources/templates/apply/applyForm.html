@@ -2,132 +2,163 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{layouts/layout1}">
-	
-	<th:block layout:fragment="css">
+
+<th:block layout:fragment="css">
 	<style>
-		.shop-item {
-		  font-family: "Roboto Condensed", sans-serif;
-		  text-align: center;
-		  margin: 0 0 40px;
-		}
-		
-		.shop-item-image {
-		  position: relative;
-		  overflow: hidden;
-		}
-		
-		.shop-item-image img {
-		  width: 100%;
-		}
-		
-		.shop-item-detail,
-		.shop-item-image:after {
-		  transition: all 0.4s ease-in-out 0s;
-		}
-		
-		.shop-item-image:after {
-		  position: absolute;
-		  display: block;
-		  content: "";
-		  height: 100%;
-		  width: 100%;
-		  left: 0;
-		  top: 0;
-		}
-		
-		.shop-item-detail {
-		  position: absolute;
-		  width: 100%;
-		  left: 0;
-		  bottom: 100%;
-		  padding: 20px;
-		  opacity: 0;
-		  z-index: 2;
-		  text-align: center;
-		  font-size: 12px;
-		  color: #aaa;
-		}
-		
-		.shop-item:hover .shop-item-image:after {
-		  background: rgba(255, 255, 255, 0.7);
-		}
-		
-		.shop-item:hover .shop-item-detail {
-		  opacity: 1;
-		  bottom: 50%;
-		  -webkit-transform: translateY(50%);
-		  -ms-transform: translateY(50%);
-		  transform: translateY(50%);
-		}
-		
-		.shop-item-detail a {
-			display: inline-block; /* 변경된 부분: 인라인 블록으로 수정 */
-			margin-top: 10px;
-		}
-		
-		.shop-item-title {
-		  font-weight: 400;
-		  font-size: 14px;
-		  color: #111;
-		  margin: 15px 0 5px;
-		}
+.shop-item {
+	font-family: "Roboto Condensed", sans-serif;
+	text-align: center;
+	margin: 0 0 40px;
+}
 
-		/* 추가한 스타일: 버튼 텍스트 정렬과 간격 조정 */
+.shop-item-image {
+	position: relative;
+	overflow: hidden;
+}
 
-	</style>
-	</th:block>
-	
-	
-	<div layout:fragment="content">
-	
+.shop-item-image img {
+	width: 100%;
+}
+
+.shop-item-detail, .shop-item-image:after {
+	transition: all 0.4s ease-in-out 0s;
+}
+
+.shop-item-image:after {
+	position: absolute;
+	display: block;
+	content: "";
+	height: 100%;
+	width: 100%;
+	left: 0;
+	top: 0;
+}
+
+.shop-item-detail {
+	position: absolute;
+	width: 100%;
+	left: 0;
+	bottom: 100%;
+	padding: 20px;
+	opacity: 0;
+	z-index: 2;
+	text-align: center;
+	font-size: 12px;
+	color: #aaa;
+}
+
+.shop-item:hover .shop-item-image:after {
+	background: rgba(255, 255, 255, 0.7);
+}
+
+.shop-item:hover .shop-item-detail {
+	opacity: 1;
+	bottom: 50%;
+	-webkit-transform: translateY(50%);
+	-ms-transform: translateY(50%);
+	transform: translateY(50%);
+}
+
+.shop-item-detail a {
+	display: inline-block;
+	margin-top: 10px;
+}
+
+.shop-item-title {
+	font-weight: 400;
+	font-size: 14px;
+	color: #111;
+	margin: 15px 0 5px;
+}
+</style>
+</th:block>
+
+<div layout:fragment="content">
+
 	<!-- Post Content-->
-        <article class="mb-4">
-            <div class="container px-4 px-lg-5">
-                <div class="row gx-4 gx-lg-5 justify-content-center">
-                    <div class="col-md-12 col-lg-12 col-xl12">
-			            <table class="table table-hover">
-						  <tbody>
-						  <!-- 반복 -->
-						    <tr th:each="subject, status:${subjects.getContent()}">
-						    
-						      <td style="border-right: 1px solid rgb(222,226,230)">
-						      	<div class="row multi-columns-row">
-					             <div class="col-sm-2 col-md-5 col-lg-5">
-					                <div class="shop-item">
-					                  <div class="shop-item-image"><img src="/img/EZEN.PNG/" alt="Image"/>
-					                   <div class="shop-item-detail">
-					                      <h4 class="shop-item-title font-alt"><a href="#" th:text="${subject.subjectName}">개발자 A반</a></h4>
-					                   </div>
-					               						       
-					                      
-					              </div>
-					                  </div>
-					                </div>
-					              </div>
-								
-						      </td>
-						      <td style="border-right: 1px solid rgb(222,226,230)">
-						      	<span th:text="${subject.subjectDetail}"></span>
-						      </td>
-						      <td style="text-align: right;">
-						      <button type="button" class="btn btn-outline-secondary" >수강신청</button>
-						      </td>
-						    </tr>
-						     <!-- 반복 -->
-						  </tbody>
-						</table>
-			              <!-- 수강신청 부분 -->
-			              <!-- item strat -->
-						  <!-- item e d -->
-                    </div>
-                </div>
-            </div>
-        </article>
-	</div>
-	
-	
-	<th:block layout:fragment="script">
-	
-	</th:block>
-	
+	<article class="mb-4">
+		<div class="container px-4 px-lg-5">
+			<div class="row gx-4 gx-lg-5 justify-content-center">
+				<div class="col-md-12 col-lg-12 col-xl12">
+					<table class="table table-hover">
+						<tbody>
+							<!-- 반복 -->
+							<tr th:each="subject, status:${subjects.getContent()}">
+
+								<td style="border-right: 1px solid rgb(222, 226, 230)">
+									<div class="row multi-columns-row">
+										<div class="col-sm-2 col-md-5 col-lg-5">
+											<div class="shop-item">
+												<div class="shop-item-image">
+													<img src="/img/EZEN.PNG/" alt="Image" />
+													<div class="shop-item-detail">
+														<h4 class="shop-item-title font-alt">
+															<a href="#" th:text="${subject.subjectName}">개발자 A반</a>
+														</h4>
+													</div>
+
+												</div>
+											</div>
+										</div>
+									</div>
+
+								</td>
+								<td style="border-right: 1px solid rgb(222, 226, 230)"><span
+									th:text="${subject.subjectDetail}"></span></td>
+								<td style="text-align: right;">
+									<button type="button" class="btn btn-outline-secondary">수강신청</button>
+								</td>
+							</tr>
+							<!-- 반복 -->
+						</tbody>
+					</table>
+					<!-- 수강신청 부분 -->
+					<!-- item strat -->
+					<!-- item e d -->
+					
+					<!-- page start ☆★수정 필요★☆ -->
+							<div
+								th:with="start=${(items.number/maxPage)*maxPage + 1}, end=(${(items.totalPages == 0) ? 1 : (start + (maxPage - 1) < items.totalPages ? start + (maxPage - 1) : items.totalPages)})">
+								<ul class="pagination justify-content-center">
+
+									<li class="page-item"
+										th:classappend="${items.number eq 0}?'disabled':''"><a
+										th:href="@{'/item/shop' + '?searchQuery=' + ${itemSearchDto.searchQuery} 
+																				  + '&page=' + ${items.number-1}}"
+										aria-label='Previous' class="page-link"> <span
+											aria-hidden='true'>이전</span></a>
+									</li>
+
+									<li class="page-item"
+										th:each="page: ${#numbers.sequence(start, end)}"
+										th:classappend="${items.number eq page-1}?'active':''"><a
+										th:href="@{'/item/shop' +'?searchQuery=' + ${itemSearchDto.searchQuery} 
+										                                         + '&page=' + ${page-1}}"
+										th:inline="text" class="page-link">[[${page}]]</a></li>
+
+									<li class="page-item"
+										th:classappend="${items.number+1 ge items.totalPages}?'disabled':''">
+										<a
+										th:href="@{'/item/shop' +'?searchQuery=' + ${itemSearchDto.searchQuery} 
+										                                         + '&page=' + ${items.number+1}}"
+										aria-label='Next' class="page-link"> <span
+											aria-hidden='true'>다음</span>
+									</a>
+									</li>
+
+								</ul>
+							</div>
+							<!-- page end -->
+					
+				</div>
+			</div>
+		</div>
+	</article>
+</div>
+
+
+<th:block layout:fragment="script">
+
+</th:block>
+
 </html>
