@@ -1,42 +1,33 @@
 package com.example.apply.entity;
 
 import java.time.LocalDateTime;
+import jakarta.persistence.*;
+import lombok.*;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-
-@Entity // 엔티티 클래스로 정의. 꼭 있어야 함.
-@Table(name = "qna") // 테이블 이름 지정.
+@Entity
+@Table(name = "qna")
 @Getter
 @Setter
-@ToString
+@ToString //객체가 가지고 있는 정보나 값들을 문자열로 만들어 리턴.
 public class Qna {
-	
-	@Id
-	@Column(name="qna_id")
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id; //글번호
-	
-	@Column(nullable = false)
-	private String title; //글 제목
+
+	@Id //기본키
+	@Column(name = "qna_id") //db에 저장되는 이름이라 형식 다름.
+	@GeneratedValue(strategy = GenerationType.AUTO) //기본키 자동 생성
+	private Long id;
 	
 	@Column(nullable = false)
-	private LocalDateTime date; //작성일
+	private String title;
 	
 	@Column(nullable = false)
-	private String content; //글 내용
+	private LocalDateTime date;
 	
+	@Column(nullable = false)
+	private String content;
+	
+	//학생식별자
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "member_id")
 	private Member member; 
+	
 }

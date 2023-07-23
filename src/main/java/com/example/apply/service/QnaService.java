@@ -9,9 +9,13 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-@Transactional
+@Transactional //임포트 주의
 public class QnaService {
-	public Long SaveQna(QnaDto qnaDto) {
+
+	public Long saveQna(QnaDto qnaDto) {
 		return null;
 	}
+	
+	
 }
+

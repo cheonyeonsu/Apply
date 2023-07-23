@@ -4,28 +4,25 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.example.apply.dto.QnaDto;
-
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @Controller
-@RequiredArgsConstructor //생성자 주입
+@RequiredArgsConstructor 
 public class QnaController {
 
-	@GetMapping(value="/qna/list")
-	public String list() {
-		return "qna/qnaList";
+	@GetMapping(value = "/qna/list")
+	public String List() {
+		return "/qna/qnaList";
 	}
 	
-	@GetMapping(value="/qna/regist")
-	public String regist() {
+	@GetMapping(value = "/qna/regist")
+	public String Regist(){
 		return "qna/qnaRegist";
 	}
 	
-	//게시글 등록하기
-	@PostMapping(value="/qna/regist") 
-	public String addRegist(@Valid QnaDto qnaDto) {
+	//등록하기
+	@PostMapping(value = "/qna/regist")
+	public String addRegist() {
 		return "qna/qnaRegist";
 	}
 }

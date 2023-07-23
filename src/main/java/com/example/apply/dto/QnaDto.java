@@ -8,18 +8,14 @@ import lombok.Setter;
 @Getter
 @Setter
 public class QnaDto {
-//erd 보고 작성
-		
-	private long id; //글번호
+
+	private Long id;
 	
-	private String title; //글 제목
+	private String title;
 	
-	private LocalDateTime date; //작성일
+	private LocalDateTime date;
 	
-	private String content; //글 내용
-	
-	
-	
+	private String content;
 	
 	
 }
