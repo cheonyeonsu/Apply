@@ -6,7 +6,6 @@ import org.modelmapper.ModelMapper;
 
 import com.example.apply.entity.Qna;
 
-
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,8 +23,9 @@ public class QnaDto {
 	
 	private static ModelMapper modelMapper = new ModelMapper();
 	
-	//dto를 entity로 바꿈.
 	public Qna createQna() {
-		return modelMapper.map(this,Qna.class);
+		return modelMapper.map(this, Qna.class);
 	}
+	
+	 
 }

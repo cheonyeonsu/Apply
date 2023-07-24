@@ -32,41 +32,38 @@ layout:decorate="~{layouts/layout1}">
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
+  <!-- 반복 Start -->
+    <tr th:each="qna, status:${lists}">
+      <th scope="row" th:text="${qna.id}"></th>
+      <td th:text="${qna.title}"></td>
+      <td th:text="${qna.date}"></td>
+      <td th:text="${qna.member.userId}"></td>
     </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td colspan="2">Larry the Bird</td>
-      <td>@twitter</td>
-    </tr>
+   <!-- 반복 End -->
   </tbody>
 </table>
 
 <nav aria-label="Page navigation example" class="d-flex justify-content-center">
   <ul class="pagination">
+  <!-- 이전 버튼 -->
     <li class="page-item">
       <a class="page-link" href="#" aria-label="Previous">
         <span aria-hidden="true">&laquo;</span>
       </a>
     </li>
+  <!-- 이전 버튼 -->
+  
+  <!-- 페이지 번호(반복) -->  
     <li class="page-item"><a class="page-link" href="#">1</a></li>
-    <li class="page-item"><a class="page-link" href="#">2</a></li>
-    <li class="page-item"><a class="page-link" href="#">3</a></li>
+  <!-- 페이지 번호(반복) -->
+    
+   <!-- 다음 버튼 -->
     <li class="page-item">
       <a class="page-link" href="#" aria-label="Next">
         <span aria-hidden="true">&raquo;</span>
       </a>
     </li>
+   <!-- 다음 버튼 -->
   </ul>
 </nav>
 <div class="d-flex justify-content-end">
