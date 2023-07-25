@@ -40,6 +40,9 @@ public class Qna {
 	@JoinColumn(name = "member_id")
 	private Member member;
 	
-	
+	public void updateQna(String title, String content) {
+		this.title = title;
+		this.content = content;
+	}
 	
 }

@@ -13,6 +13,7 @@ import com.example.apply.entity.Qna;
 import com.example.apply.repository.MemberRepository;
 import com.example.apply.repository.QnaRepository;
 
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -41,4 +42,38 @@ public class QnaService {
 		return mainitemPage;
 		
 	}
+	
+	public Qna getDetailPage(Long id) {
+		
+		// 1. qna객체에 담아서 리턴시키던가
+		// 2. findById를 호출한 자체를 리턴시키던가. 
+		
+		Qna qna = qnaRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+		
+		
+		return qna;
+		
+	}
+	
+	public Qna updateQna(Long id,QnaDto qnaDto) {
+		
+		Qna qna = qnaRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+		
+		qna.updateQna(qnaDto.getTitle(), qnaDto.getContent());
+		
+		return qna;
+	}
+	
+	public Qna deleteQna(Long id) {
+		
+		Qna qna = qnaRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+		
+		qnaRepository.delete(qna);
+		
+		return qna;
+	}
+	
+	
+	
+	
 }

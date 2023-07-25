@@ -1,90 +1,102 @@
 <!-- 리스트 뽑음 -->
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-layout:decorate="~{layouts/layout1}">
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout1}">
 
 <th:block layout:fragment="css">
 	<style>
-		.board {
-			width: 900px;
-			margin: 0 auto;
-		}
+.board {
+	width: 900px;
+	margin: 0 auto;
+}
 
-		.btn {
-			border-radius: 5px;
-		}
-	</style>
+.btn {
+	border-radius: 5px;
+}
+</style>
 </th:block>
 
 <div layout:fragment="content" class="content">
 
 
-<div class="board">
+	<div class="board">
 
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th scope="col">번호</th>
-      <th scope="col">제목</th>
-      <th scope="col">등록일</th>
-      <th scope="col">작성자</th>
-    </tr>
-  </thead>
-  <tbody>
-  <!-- 반복 Start -->
-    <tr th:each="qna, status:${lists}">
-      <th scope="row" th:text="${qna.id}"></th>
-      <td th:text="${qna.title}"></td>
-      <td th:text="${qna.date}"></td>
-      <td th:text="${qna.member.userId}"></td>
-    </tr>
-   <!-- 반복 End -->
-  </tbody>
-</table>
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th scope="col">번호</th>
+					<th scope="col">제목</th>
+					<th scope="col">등록일</th>
+					<th scope="col">작성자</th>
+				</tr>
+			</thead>
+			<tbody>
+				<!-- 반복 Start -->
+				<tr th:each="qna, status:${lists}">
+					<th scope="row" th:text="${qna.id}"></th>
+					<!-- <a> 태그를 사용하여 게시글 제목을 링크로 만들기 -->
+					<td>
+						<a th:href="@{/qna/detail/{id}(id=${qna.id})}"> 
+						<span th:text="${qna.title}"></span></a>
+					</td>
+					<td th:text="${qna.date}"></td>
+					<td th:text="${qna.member.userId}"></td>
+				</tr>
+				<!-- 반복 End -->
+			</tbody>
+		</table>
 
-<nav aria-label="Page navigation example" class="d-flex justify-content-center">
-  <ul class="pagination">
-  <!-- 이전 버튼 -->
-    <li class="page-item">
-      <a class="page-link" href="#" aria-label="Previous">
-        <span aria-hidden="true">&laquo;</span>
-      </a>
-    </li>
-  <!-- 이전 버튼 -->
-  
-  <!-- 페이지 번호(반복) -->  
-    <li class="page-item"><a class="page-link" href="#">1</a></li>
-  <!-- 페이지 번호(반복) -->
-    
-   <!-- 다음 버튼 -->
-    <li class="page-item">
-      <a class="page-link" href="#" aria-label="Next">
-        <span aria-hidden="true">&raquo;</span>
-      </a>
-    </li>
-   <!-- 다음 버튼 -->
-  </ul>
-</nav>
-<div class="d-flex justify-content-end">
+		<nav aria-label="Page navigation example"
+			class="d-flex justify-content-center"
+			th:with="start=${(lists.number/maxPage)*maxPage + 1}, 
+		end=(${(lists.totalPages == 0) ? 1 : (start + (maxPage - 1) < lists.totalPages ? start + (maxPage - 1) : lists.totalPages)})">
 
-<!--★onclick으로 효과주기★-->
-<button type="button" class="btn btn-outline-secondary" onclick="pagemove()">작성하기</button>
-</div>
+			<ul class="pagination">
+				<!-- 이전 버튼 -->
+				<li class="page-item"
+					th:classappend="${lists.number eq 0}?'disabled':''"><a
+					th:href="@{'/qna/list/' + ${lists.number-1}}" class="page-link"
+					href="#" aria-label="Previous"> <span aria-hidden="true">이전</span>
+				</a></li>
+				<!-- 이전 버튼 -->
 
-</div>
+				<!-- 페이지 번호(반복) -->
+				<li class="page-item"
+					th:each="page: ${#numbers.sequence(start, end)}"
+					th:classappend="${lists.number eq page-1}?'active':''"><a
+					th:href="@{'/qna/list/' + ${page-1}}" th:inline="text"
+					class="page-link">[[${page}]]</a></li>
+				<!-- 페이지 번호(반복) -->
+
+				<!-- 다음 버튼 -->
+				<li class="page-item"
+					th:classappend="${lists.number+1 ge lists.totalPages}?'disabled':''"><a
+					th:href="@{'/qna/list/' + ${lists.number+1}}" aria-label='Next'
+					class="page-link"> <span aria-hidden='true'>다음</span>
+				</a></li>
+				<!-- 다음 버튼 -->
+			</ul>
+		</nav>
+		<div class="d-flex justify-content-end">
+
+			<!--★onclick으로 효과주기★-->
+			<button type="button" class="btn btn-outline-secondary"
+				onclick="pagemove()">작성하기</button>
+		</div>
+
+	</div>
 
 </div>
 
 <!-- 각 페이지의 스크립트가 작성될 위치 -->
 <th:block layout:fragment="script">
 	<script th:inline="javascript">
+		//작성하기 버튼 누르면 이동할 곳 지정해줌. 경로에 '/'빼먹지 않게 주의.
+		function pagemove() {
 
-	//작성하기 버튼 누르면 이동할 곳 지정해줌. 경로에 '/'빼먹지 않게 주의.
-	function pagemove(){ 
-		
-		location.href = "/qna/regist"; 
-	}
+			location.href = "/qna/regist";
+		}
 	</script>
 </th:block>
 

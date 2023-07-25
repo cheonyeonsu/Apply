@@ -27,5 +27,4 @@ public class QnaDto {
 		return modelMapper.map(this, Qna.class);
 	}
 	
-	 
 }

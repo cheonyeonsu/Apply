@@ -6,11 +6,15 @@ import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.apply.dto.QnaDto;
 import com.example.apply.entity.Qna;
@@ -33,9 +37,11 @@ public class QnaController {
 		
 		Page<Qna> list = qnaService.getListPage(pageable);
 		
+		//숫자 5를 maxPage라는 이름으로 view에 보낸다
+		//model.addAttribute(String key, Object value);
 		model.addAttribute("lists",list);
+		model.addAttribute("maxPage",5);
 		
-
 		return "qna/qnaList";
 	}
 	
@@ -56,6 +62,47 @@ public class QnaController {
 			e.printStackTrace();
 		}
 		
-		return "qna/qnaRegist";
+		return "redirect:/qna/list";
+	}
+	
+	
+	@GetMapping(value = {"/qna/detail", "/qna/detail/{id}"})
+	public String detail(@PathVariable(name = "id") Long id,Model model) {
+		
+		Qna qna = qnaService.getDetailPage(id);
+		
+		 model.addAttribute("qna", qna); 
+		 
+		return "qna/qnaDetail";
+	}
+	
+	//수정하기
+	@GetMapping(value={"/qna/modify","/qna/modify/{id}"})
+	public String edit(@PathVariable(name = "id") Long id, Model model) {
+		Qna qna = qnaService.getDetailPage(id);
+		
+		model.addAttribute("qnaDto", new QnaDto());
+		model.addAttribute("qna", qna); 
+		 
+		return "qna/qnaEdit";
+	}
+	
+	@PostMapping(value={"/qna/modify","/qna/modify/{id}"})
+	public String edit(@Valid QnaDto qnaDto, Principal principal,@PathVariable(name = "id") Long id) {
+		
+		qnaService.updateQna(id, qnaDto);
+		
+		//redirect : 지정된 다른 URL로 재요청하라고 지시
+		return "redirect:/qna/detail/" + id;
+	}
+	
+	//삭제하기 
+	@DeleteMapping("/qna/delete/{id}")
+	public @ResponseBody ResponseEntity deleteQna
+	(@PathVariable ("id") Long id,Principal principal) {
+		
+		qnaService.deleteQna(id);
+		
+		return new ResponseEntity<Long>(id,HttpStatus.OK);
 	}
 }
