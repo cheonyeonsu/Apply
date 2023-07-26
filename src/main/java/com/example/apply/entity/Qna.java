@@ -1,5 +1,6 @@
 package com.example.apply.entity;
 
+
 import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
@@ -15,43 +16,35 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-@Entity
-@Table(name = "qna")
-<<<<<<< HEAD
+@Entity // 엔티티 클래스로 정의. 꼭 있어야 함.
+@Table(name = "qna") // 테이블 이름 지정.
 @Getter
 @Setter
-@ToString
-=======
-@ToString
-@Getter
-@Setter
->>>>>>> c6e926bc8e25f2431dc63482fe5f778d5d961c7c
+@ToString //객체가 가지고 있는 정보나 값들을 문자열로 만들어 리턴.
 public class Qna {
+	
+	@Id //기본키.
+	@Column(name="qna_id") //db에 저장되는 이름이라 언더바 들어감
+	@GeneratedValue(strategy = GenerationType.AUTO) //기본 키 생성을 데이터베이스에 위임
+	private Long id; //글 번호
+	
+	@Column(nullable = false)
+	private String title; //글 제목
+	
+	@Column(nullable = false)
+	private LocalDateTime date; //작성일
+	
+	@Column(nullable = false)
+	private String content; //글 내용
 
-	@Id
-	@Column(name = "qna_id")
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
-	
-	@Column(nullable = false)
-	private String title;
-	
-	@Column(nullable = false)
-	private LocalDateTime date;
-	
-	@Column(nullable = false)
-	private String content;
-	
+	//학생식별자
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "member_id")
-	private Member member;
-<<<<<<< HEAD
-=======
-	
+	private Member member; 
+
 	public void updateQna(String title, String content) {
 		this.title = title;
 		this.content = content;
 	}
-	
->>>>>>> c6e926bc8e25f2431dc63482fe5f778d5d961c7c
+
 }

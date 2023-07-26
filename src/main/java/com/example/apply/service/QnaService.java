@@ -1,37 +1,25 @@
 package com.example.apply.service;
 
-<<<<<<< HEAD
-=======
 import java.time.LocalDateTime;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
->>>>>>> c6e926bc8e25f2431dc63482fe5f778d5d961c7c
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.apply.dto.QnaDto;
-<<<<<<< HEAD
-
-=======
 import com.example.apply.entity.Member;
 import com.example.apply.entity.Qna;
 import com.example.apply.repository.MemberRepository;
 import com.example.apply.repository.QnaRepository;
 
 import jakarta.persistence.EntityNotFoundException;
->>>>>>> c6e926bc8e25f2431dc63482fe5f778d5d961c7c
 import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
 @Transactional
 public class QnaService {
-<<<<<<< HEAD
-	public Long saveQna(QnaDto qnaDto) {
-		return null;
-	}
-=======
 
 	private final QnaRepository qnaRepository;
 	private final MemberRepository memberRepository;
@@ -88,5 +76,4 @@ public class QnaService {
 	
 	
 	
->>>>>>> c6e926bc8e25f2431dc63482fe5f778d5d961c7c
 }

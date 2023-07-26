@@ -1,12 +1,5 @@
 package com.example.apply.controller;
 
-<<<<<<< HEAD
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-
-import com.example.apply.dto.QnaDto;
-=======
 import java.security.Principal;
 import java.util.Optional;
 
@@ -27,42 +20,16 @@ import com.example.apply.dto.QnaDto;
 import com.example.apply.entity.Qna;
 import com.example.apply.service.QnaService;
 
->>>>>>> c6e926bc8e25f2431dc63482fe5f778d5d961c7c
-
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequiredArgsConstructor
 public class QnaController {
-<<<<<<< HEAD
 
-	//게시글 화면 보여줌
-	@GetMapping(value = "/qna/list")
-	public String list() {
-		return "qna/qnaList";
-	}
-	
-	//게시글 등록 화면 보여줌
-	@GetMapping(value = "/qna/regist")
-	public String regist() {
-		return "qna/regist";
-	}
-	
-	//게시글 등록
-	@PostMapping(value = "/qna/regist")
-	public String addRegist(@Valid QnaDto qndDto) {
-	
-		
-		//post요청 처리 후 다른 페이지로 이동하기 위해 redirect사용.
-		return "redirect:qna/regist";
-		
-	}
-	
-=======
-	
 	private final QnaService qnaService;
 	
+	//게시글 화면 보여줌
 	@GetMapping(value={"/qna/list", "/qna/list/{page}"})
 	public String list(Model model,QnaDto qnaDto, @PathVariable("page") Optional<Integer> page) {
 		//한 페이지당 5개씩 보여주기
@@ -78,12 +45,13 @@ public class QnaController {
 		return "qna/qnaList";
 	}
 	
-	
+	//게시글 등록 화면 보여줌
 	@GetMapping(value="/qna/regist")
 	public String regist() {
 		return "qna/qnaRegist";
 	}
 	
+	//게시글 등록
 	@PostMapping(value = "/qna/regist") 
 	public String addRegist(@Valid QnaDto qnaDto, Principal principal) {
 		 
@@ -138,5 +106,5 @@ public class QnaController {
 		
 		return new ResponseEntity<Long>(id,HttpStatus.OK);
 	}
->>>>>>> c6e926bc8e25f2431dc63482fe5f778d5d961c7c
+
 }
