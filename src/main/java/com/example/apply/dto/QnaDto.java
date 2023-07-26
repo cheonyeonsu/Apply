@@ -8,7 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class QnaDto {
-
+	
 	private Long id;
 	
 	private String title;
@@ -16,6 +16,4 @@ public class QnaDto {
 	private LocalDateTime date;
 	
 	private String content;
-	
-	
 }
