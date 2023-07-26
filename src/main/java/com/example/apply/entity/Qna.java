@@ -17,9 +17,15 @@ import lombok.ToString;
 
 @Entity
 @Table(name = "qna")
+<<<<<<< HEAD
 @Getter
 @Setter
 @ToString
+=======
+@ToString
+@Getter
+@Setter
+>>>>>>> c6e926bc8e25f2431dc63482fe5f778d5d961c7c
 public class Qna {
 
 	@Id
@@ -39,4 +45,13 @@ public class Qna {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "member_id")
 	private Member member;
+<<<<<<< HEAD
+=======
+	
+	public void updateQna(String title, String content) {
+		this.title = title;
+		this.content = content;
+	}
+	
+>>>>>>> c6e926bc8e25f2431dc63482fe5f778d5d961c7c
 }

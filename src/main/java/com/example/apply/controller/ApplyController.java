@@ -21,7 +21,11 @@ public class ApplyController {
 
 	private final SubjectService subjectService; //의존성 줌
 	
+<<<<<<< HEAD
 	@GetMapping(value="/apply/new") //경로 "/apply/new/{page}"
+=======
+	@GetMapping(value={"/apply/new", "/apply/new/{page}"}) //경로
+>>>>>>> c6e926bc8e25f2431dc63482fe5f778d5d961c7c
 	public String applyForm(Model model, SubjectSearchDto subjectSearchDto, Optional<Integer> page ) {
 		Pageable pageable = PageRequest.of(page.isPresent()?page.get():0, 5); 
 		Page<SubjectDto> subjects = subjectService.getApplyPage(subjectSearchDto, pageable);
@@ -30,7 +34,7 @@ public class ApplyController {
 		model.addAttribute("subjectSearchDto",subjectSearchDto);
 		model.addAttribute("maxPage",5);
 		
-		return "apply/applyForm"; //파일 이름
+		return "apply/applyForm"; //리턴할 파일 이름
 	}
 	
 	

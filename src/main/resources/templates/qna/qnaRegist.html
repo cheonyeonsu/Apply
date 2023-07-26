@@ -6,6 +6,7 @@
 
 <th:block layout:fragment="css">
 	<style>
+<<<<<<< HEAD
 		.content_box {
 			width: 700px;
 			margin: 0 auto;
@@ -15,11 +16,27 @@
 			border-radius: 5px;
 		}
 </style>
+=======
+	.content_box {
+	width: 700px;
+	margin: 0 auto;
+}
+
+	.btn {
+		border-radius: 5px;
+	}
+	</style>
+
+>>>>>>> c6e926bc8e25f2431dc63482fe5f778d5d961c7c
 
 </th:block>
 
 <div layout:fragment="content" class="content">
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> c6e926bc8e25f2431dc63482fe5f778d5d961c7c
 <form action="/qna/regist" method="post" name="registForm">
 	<!-- ★제목,내용 2개 div를 하나의 div로 묶어 css에서 크기조절★ -->
 	<div class="content_box"> 
@@ -27,7 +44,11 @@
 			<dl>
 				<dt>제&nbsp;&nbsp;&nbsp;&nbsp;목</dt>
 				<dd>
+<<<<<<< HEAD
 					<input type="text" name="subject" size="60" maxlength="100"
+=======
+					<input type="text" name="title" size="60" maxlength="100"
+>>>>>>> c6e926bc8e25f2431dc63482fe5f778d5d961c7c
 						class="boxTF" />
 				</dd>
 			</dl>
@@ -46,8 +67,16 @@
 			>등록하기</button>
 	</div>
 	</div>
+<<<<<<< HEAD
 </form>
 
+=======
+	<!-- 필수 -->
+	<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+</form>
+
+
+>>>>>>> c6e926bc8e25f2431dc63482fe5f778d5d961c7c
 </div>
 
 <!-- 각 페이지의 스크립트가 작성될 위치 -->
