@@ -24,6 +24,7 @@ public class QnaService {
 	private final QnaRepository qnaRepository;
 	private final MemberRepository memberRepository;
 	
+	//게시글 작성
 	public Long saveQna(QnaDto qnaDto, String id) {
 		Qna qna = qnaDto.createQna();
 		
@@ -36,6 +37,7 @@ public class QnaService {
 		return qna.getId();
 	}
 	
+	//작성한 글 리스트 보여주기
 	@Transactional(readOnly = true)
 	public Page<Qna> getListPage(Pageable pageable){
 		Page<Qna> mainitemPage = qnaRepository.findAll(pageable);
@@ -43,18 +45,16 @@ public class QnaService {
 		
 	}
 	
+	//작성한 글 내용 보여주기
 	public Qna getDetailPage(Long id) {
-		
-		// 1. qna객체에 담아서 리턴시키던가
-		// 2. findById를 호출한 자체를 리턴시키던가. 
-		
+	
 		Qna qna = qnaRepository.findById(id).orElseThrow(EntityNotFoundException::new);
-		
 		
 		return qna;
 		
 	}
 	
+	//수정하기
 	public Qna updateQna(Long id,QnaDto qnaDto) {
 		
 		Qna qna = qnaRepository.findById(id).orElseThrow(EntityNotFoundException::new);
@@ -64,6 +64,7 @@ public class QnaService {
 		return qna;
 	}
 	
+	//삭제하기
 	public Qna deleteQna(Long id) {
 		
 		Qna qna = qnaRepository.findById(id).orElseThrow(EntityNotFoundException::new);

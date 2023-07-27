@@ -1,22 +1,6 @@
 <!-- 리스트 뽑음 -->
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-<<<<<<< HEAD
-xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-layout:decorate="~{layouts/layout1}">
-
-<th:block layout:fragment="css">
-	<style>
-		.board {
-			width: 900px;
-			margin: 0 auto;
-		}
-
-		.btn {
-			border-radius: 5px;
-		}
-	</style>
-=======
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{layouts/layout1}">
 
@@ -31,70 +15,11 @@ layout:decorate="~{layouts/layout1}">
 	border-radius: 5px;
 }
 </style>
->>>>>>> c6e926bc8e25f2431dc63482fe5f778d5d961c7c
 </th:block>
 
 <div layout:fragment="content" class="content">
 
 
-<<<<<<< HEAD
-<div class="board">
-
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th scope="col">번호</th>
-      <th scope="col">제목</th>
-      <th scope="col">등록일</th>
-      <th scope="col">작성자</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td colspan="2">Larry the Bird</td>
-      <td>@twitter</td>
-    </tr>
-  </tbody>
-</table>
-
-<nav aria-label="Page navigation example" class="d-flex justify-content-center">
-  <ul class="pagination">
-    <li class="page-item">
-      <a class="page-link" href="#" aria-label="Previous">
-        <span aria-hidden="true">&laquo;</span>
-      </a>
-    </li>
-    <li class="page-item"><a class="page-link" href="#">1</a></li>
-    <li class="page-item"><a class="page-link" href="#">2</a></li>
-    <li class="page-item"><a class="page-link" href="#">3</a></li>
-    <li class="page-item">
-      <a class="page-link" href="#" aria-label="Next">
-        <span aria-hidden="true">&raquo;</span>
-      </a>
-    </li>
-  </ul>
-</nav>
-<div class="d-flex justify-content-end">
-
-<!--★onclick으로 효과주기★-->
-<button type="button" class="btn btn-outline-secondary" onclick="pagemove()">작성하기</button>
-</div>
-
-</div>
-=======
 	<div class="board">
 
 		<table class="table table-hover">
@@ -161,27 +86,17 @@ layout:decorate="~{layouts/layout1}">
 		</div>
 
 	</div>
->>>>>>> c6e926bc8e25f2431dc63482fe5f778d5d961c7c
 
 </div>
 
 <!-- 각 페이지의 스크립트가 작성될 위치 -->
 <th:block layout:fragment="script">
 	<script th:inline="javascript">
-<<<<<<< HEAD
-
-	//작성하기 버튼 누르면 이동할 곳 지정해줌. 경로에 '/'빼먹지 않게 주의.
-	function pagemove(){ 
-		
-		location.href = "/qna/regist"; 
-	}
-=======
 		//작성하기 버튼 누르면 이동할 곳 지정해줌. 경로에 '/'빼먹지 않게 주의.
 		function pagemove() {
 
 			location.href = "/qna/regist";
 		}
->>>>>>> c6e926bc8e25f2431dc63482fe5f778d5d961c7c
 	</script>
 </th:block>
 
