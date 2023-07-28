@@ -33,47 +33,33 @@
 			</thead>
 			<tbody>
 				<!-- 반복 Start -->
-				<tr th:each="qna, status:${lists}">
-					<th scope="row" th:text="${qna.id}"></th>
-					<!-- <a> 태그를 사용하여 게시글 제목을 링크로 만들기 -->
+				<tr>
+					<th ></th>
 					<td>
-						<a th:href="@{/qna/detail/{id}(id=${qna.id})}"> 
-						<span th:text="${qna.title}"></span></a>
+						<a> 
+						<span></span></a>
 					</td>
-					<td th:text="${qna.date}"></td>
-					<td th:text="${qna.member.userId}"></td>
+					<td></td>
+					<td></td>
 				</tr>
 				<!-- 반복 End -->
 			</tbody>
 		</table>
 
-		<nav aria-label="Page navigation example"
-			class="d-flex justify-content-center"
-			th:with="start=${(lists.number/maxPage)*maxPage + 1}, 
-		end=(${(lists.totalPages == 0) ? 1 : (start + (maxPage - 1) < lists.totalPages ? start + (maxPage - 1) : lists.totalPages)})">
-
+		<nav class="d-flex justify-content-center">
 			<ul class="pagination">
 				<!-- 이전 버튼 -->
-				<li class="page-item"
-					th:classappend="${lists.number eq 0}?'disabled':''"><a
-					th:href="@{'/qna/list/' + ${lists.number-1}}" class="page-link"
-					href="#" aria-label="Previous"> <span aria-hidden="true">이전</span>
+				<li><a> <span>이전</span>
 				</a></li>
 				<!-- 이전 버튼 -->
 
 				<!-- 페이지 번호(반복) -->
-				<li class="page-item"
-					th:each="page: ${#numbers.sequence(start, end)}"
-					th:classappend="${lists.number eq page-1}?'active':''"><a
-					th:href="@{'/qna/list/' + ${page-1}}" th:inline="text"
-					class="page-link">[[${page}]]</a></li>
+				<li><a>
+					</a></li>
 				<!-- 페이지 번호(반복) -->
 
 				<!-- 다음 버튼 -->
-				<li class="page-item"
-					th:classappend="${lists.number+1 ge lists.totalPages}?'disabled':''"><a
-					th:href="@{'/qna/list/' + ${lists.number+1}}" aria-label='Next'
-					class="page-link"> <span aria-hidden='true'>다음</span>
+				<li><a> <span aria-hidden='true'>다음</span>
 				</a></li>
 				<!-- 다음 버튼 -->
 			</ul>

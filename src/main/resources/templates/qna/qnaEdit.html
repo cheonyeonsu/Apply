@@ -20,7 +20,7 @@ layout:decorate="~{layouts/layout1}">
 	<meta name="_csrf_header" th:content="${_csrf.headerName}" />
 </head>
 
-<div layout:fragment="content">
+<div layout:fragment="content" class="d-flex justify-content-center">
 
 <form th:action="@{'/qna/modify/' + ${qna.id} }" method="post" name="registForm" th:object="${qnaDto}">
 	<!-- ★제목,내용 2개 div를 하나의 div로 묶어 css에서 크기조절★ -->

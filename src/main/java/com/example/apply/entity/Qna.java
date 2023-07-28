@@ -42,6 +42,9 @@ public class Qna {
 	@JoinColumn(name = "member_id")
 	private Member member; 
 
+	
+	// Qna 엔티티 클래스에 포함되어 있음. 
+	//주어진 title, content 값으로 외부에서(public) 글의 제목과 내용을 수정
 	public void updateQna(String title, String content) {
 		this.title = title;
 		this.content = content;
