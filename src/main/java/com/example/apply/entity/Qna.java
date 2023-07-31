@@ -25,7 +25,7 @@ public class Qna {
 	
 	@Id //기본키.
 	@Column(name="qna_id") //db에 저장되는 이름이라 언더바 들어감
-	@GeneratedValue(strategy = GenerationType.AUTO) //기본 키 생성을 데이터베이스에 위임
+	@GeneratedValue(strategy = GenerationType.IDENTITY) //기본 키 생성을 데이터베이스에 위임
 	private Long id; //글 번호
 	
 	@Column(nullable = false)

@@ -61,7 +61,7 @@
 				<!-- 이전 버튼 -->
 
 				<!-- 페이지 번호(반복) -->
-					<li class="page-item"
+					<li class="page-list"
 					th:each="page: ${#numbers.sequence(start, end)}"
 					th:classappend="${lists.number eq page-1}?'active':''"><a
 					th:href="@{'/qna/list/' + ${page-1}}" th:inline="text"
@@ -69,7 +69,7 @@
 				<!-- 페이지 번호(반복) -->
 
 				<!-- 다음 버튼 -->
-				<li class="page-item"
+				<li class="page-list"
 					th:classappend="${lists.number+1 ge lists.totalPages}?'disabled':''"><a
 					th:href="@{'/qna/list/' + ${lists.number+1}}" aria-label='Next'
 					class="page-link"> <span aria-hidden='true'>다음</span>

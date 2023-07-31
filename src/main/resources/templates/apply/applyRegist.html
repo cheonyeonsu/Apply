@@ -1,0 +1,43 @@
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorate="~{layouts/layout1}">
+
+<th:block layout:fragment="css">
+<style>
+	.btn {
+	border-radius: 5px;
+</style>
+</th:block>
+
+<div layout:fragment="content" class="content">
+<form action="/apply/regist" method="post" name="registForm">
+	<!-- 과목 등록 양식 -->
+	<div class = "class-detail">
+	
+	<dl>
+		<dt>제&nbsp;&nbsp;&nbsp;&nbsp;목</dt>
+		<dd>
+			<input type="text" name="title" size="63" maxlength="100"class="boxTF" />
+		</dd>
+	</dl>
+	<dl>
+		<dt>내&nbsp;&nbsp;&nbsp;&nbsp;용</dt>
+		<dd>
+			<textarea rows="12" cols="63" name="content" class="boxTA"></textarea>
+		</dd>
+	</dl>
+	
+	</div>
+	<!-- 과목 등록 양식 -->
+
+</form>
+
+
+</div>
+
+<th:block layout:fragment="script">
+<script th:inline="javascript">
+</script>
+</th:block> 
+
+</html>

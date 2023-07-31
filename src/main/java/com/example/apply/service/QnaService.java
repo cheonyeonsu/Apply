@@ -33,10 +33,20 @@ public class QnaService {
 		qna.setMember(member); //조인컬럼 넣어줌
 		qna.setDate(LocalDateTime.now()); //현재 시간 찍어줌.
 		
+		// 게시글 번호 1부터 시작
+	    qna.setId(getNextQnaId());
+
+		
 		qnaRepository.save(qna);
 		
 		return qna.getId();
 	}
+	
+	// 현재 게시글 중 가장 큰 id 값을 가져와서 1 증가시킨 값을 반환.
+    private Long getNextQnaId() {
+        Long maxId = qnaRepository.findMaxId(); // qnaRepository에서 가장 큰 id 값을 가져오는 쿼리 추가.
+        return maxId != null ? maxId + 1 : 1L; // 첫 번째 게시글의 경우 maxId가 null일 수 있으므로 예외처리를 해줍니다.
+    }
 	
 	@Transactional(readOnly = true) //데이터베이스 읽기 작업만 수행. 
 	public Page<Qna> getListPage(Pageable pageable){
