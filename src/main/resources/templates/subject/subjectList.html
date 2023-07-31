@@ -30,26 +30,26 @@
 		</div>
 		<!-- 반복 End -->
 
-	</div>
+	</div> 
 		<div
 			th:with="start=${(subjects.number/maxPage)*maxPage + 1}, end=(${(subjects.totalPages == 0) ? 1 : (start + (maxPage - 1) < subjects.totalPages ? start + (maxPage - 1) : subjects.totalPages)})">
 			<ul class="pagination justify-content-center">
 
 				<li class="page-item"
 					th:classappend="${subjects.number eq 0}?'disabled':''"><a
-					th:href="@{'/apply/new' + ${subjects.number-1}}"
+					th:href="@{'/subject/list' + ${subjects.number-1}}"
 					aria-label='Previous' class="page-link"> <span
 						aria-hidden='true'>이전</span></a></li>
 
 				<li class="page-item"
 					th:each="page: ${#numbers.sequence(start, end)}"
 					th:classappend="${subjects.number eq page-1}?'active':''"><a
-					th:href="@{'/apply/new' + ${page-1}}" th:inline="text"
+					th:href="@{'/subject/list' + ${page-1}}" th:inline="text"
 					class="page-link">[[${page}]]</a></li>
 
 				<li class="page-item"
 					th:classappend="${subjects.number+1 ge subjects.totalPages}?'disabled':''">
-					<a th:href="@{'/apply/new' + ${subjects.number+1}}"
+					<a th:href="@{'/subject/list' + ${subjects.number+1}}"
 					aria-label='Next' class="page-link"> <span aria-hidden='true'>다음</span>
 				</a>
 				</li>
@@ -66,13 +66,17 @@
 
 <th:block layout:fragment="script">
 	<script th:inline="javascript">
+	
+	//상세보기 버튼
 	function pagemove1() {
 
 		location.href = "";
 	}
+	
+	//과목등록 버튼
 	function pagemove2() {
 
-		location.href = "/apply/regist";
+		location.href = "/subject/regist"; // apply>subject 경로 변경 완.
 	}
 	</script>
 </th:block>

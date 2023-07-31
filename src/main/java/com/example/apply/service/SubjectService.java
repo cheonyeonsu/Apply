@@ -9,7 +9,6 @@ import com.example.apply.dto.SubjectDto;
 import com.example.apply.dto.SubjectSearchDto;
 import com.example.apply.repository.SubjectRepository;
 
-
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -20,11 +19,8 @@ public class SubjectService {
 	private final SubjectRepository subjectRepository;
 	
 	@Transactional(readOnly = true)
-	public Page<SubjectDto> getApplyPage(SubjectSearchDto subjectSearchDto, Pageable pageable){
-		Page<SubjectDto> applyPage = subjectRepository.getApplyPage(subjectSearchDto, pageable);
-		return applyPage;
-		
+	public Page<SubjectDto> getSubjectPage(SubjectSearchDto subjectSearchDto, Pageable pageable){
+		Page<SubjectDto> subjectPage = subjectRepository.getSubjectPage(subjectSearchDto, pageable);
+		return subjectPage;
 	}
-	
-	
 }
