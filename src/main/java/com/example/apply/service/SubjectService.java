@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.example.apply.dto.SubjectDto;
 import com.example.apply.dto.SubjectSearchDto;
 import com.example.apply.repository.SubjectRepository;
+import com.example.apply.repository.SubjectRepositoryCustom;
 
 import lombok.RequiredArgsConstructor;
 
@@ -15,12 +16,16 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Transactional
 public class SubjectService {
-	
+
 	private final SubjectRepository subjectRepository;
-	
-	@Transactional(readOnly = true)
-	public Page<SubjectDto> getSubjectPage(SubjectSearchDto subjectSearchDto, Pageable pageable){
-		Page<SubjectDto> subjectPage = subjectRepository.getSubjectPage(subjectSearchDto, pageable);
-		return subjectPage;
-	}
+
+
+	 @Transactional(readOnly = true) 
+	 public Page<SubjectDto> getSubjectPage(SubjectSearchDto subjectSearchDto, Pageable pageable){
+	 Page<SubjectDto> subjectPage = subjectRepository.getSubjectPage(subjectSearchDto,pageable); 
+	 return  subjectPage;
+	 }
+	 
+	 
+	 
 }

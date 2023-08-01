@@ -36,7 +36,6 @@ public class QnaService {
 		// 게시글 번호 1부터 시작
 	    qna.setId(getNextQnaId());
 
-		
 		qnaRepository.save(qna);
 		
 		return qna.getId();

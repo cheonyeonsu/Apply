@@ -9,7 +9,4 @@ public class ApplyDto {
 
 	private Long id;
 	
-	
-	
-	
 }

@@ -11,23 +11,52 @@ layout:decorate="~{layouts/layout1}">
 </th:block>
 
 <div layout:fragment="content" class="content">
-<form action="/subject/regist" method="post" name="registForm">
+<form action="/subject/regist" method="post" name="registForm" class="d-flex justify-content-center">
 	<!-- 과목 등록 양식 -->
 	<div class = "class-detail">
+	<div>
+	<div class="d-flex justify-content-between">
+		<dl >
+			<dt>과목명</dt>
+			<dd>
+				<input type="text" name="subjectName" size="40" maxlength="100"class="boxTF" />
+			</dd>
+		</dl>
+		<dl>
+			<dt>수강 가능 인원</dt>
+			<dd>
+				<input type="text" name="subjectTo" size="20" maxlength="100"class="boxTF" />
+			</dd>
+		</dl>
+	</div>
+	<div class="d-flex justify-content-between col-md-6">
+		<dl>
+			<dt>개강일</dt>
+			<dd>
+				<input type="date" name="subjectStartDate" size="63" maxlength="100" class="boxTF" />
+			</dd>
+		</dl>
+		
+		
+		<dl>
+			<dt>종강일</dt>
+			<dd>
+				<input type="date" name="subjectEndDate" size="63" maxlength="100" class="boxTF" />
+			</dd>
+		</dl>
+	</div>
 	
-	<dl>
-		<dt>제&nbsp;&nbsp;&nbsp;&nbsp;목</dt>
-		<dd>
-			<input type="text" name="title" size="63" maxlength="100"class="boxTF" />
-		</dd>
-	</dl>
 	<dl>
 		<dt>내&nbsp;&nbsp;&nbsp;&nbsp;용</dt>
 		<dd>
-			<textarea rows="12" cols="63" name="content" class="boxTA"></textarea>
+			<textarea rows="5" cols="63" name="content" class="boxTA"></textarea>
 		</dd>
 	</dl>
-	
+
+	<div class="d-flex justify-content-center"> 
+		<button type="submit" class="btn btn-outline-secondary"
+			>등록하기</button>
+	</div>
 	</div>
 	<!-- 과목 등록 양식 -->
 

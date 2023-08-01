@@ -52,7 +52,7 @@ public class SubjectRepositoryCustomImpl implements SubjectRepositoryCustom {
 	}
 
 	@Override
-	public Page<SubjectDto> getApplyPage(SubjectSearchDto subjectSearchDto, Pageable pageable) {
+	public Page<SubjectDto> getSubjectPage(SubjectSearchDto subjectSearchDto,Pageable pageable) {
 		
 		//Q클래스 안나올 때는 Debug as clean/install
 		
@@ -88,5 +88,8 @@ public class SubjectRepositoryCustomImpl implements SubjectRepositoryCustom {
 		  return new PageImpl<>(content,pageable,total); 
 		
 	}
+
+
+
 
 }

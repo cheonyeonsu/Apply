@@ -14,6 +14,7 @@ import lombok.Setter;
 @Setter
 public class QnaDto {
 
+	//글 번호
 	private Long id;
 	
 	private String title;
