@@ -82,4 +82,14 @@ public class SubjectController {
 		return "subject/subjectEdit";
 		}
 	
+	// 수정 내용 저장하기
+		@PostMapping(value = { "/subject/edit", "/subject/edit/{subjectId}" })
+		public String subjectEidt(@Valid SubjectDto subjectDto, Principal principal, @PathVariable(name = "subjectId") Long subjectId) {
+			subjectDto.setSubjectId(subjectId);
+			
+			subjectService.updateSubject(subjectId, subjectDto);
+
+			return "redirect:/subject/detail/" + subjectId;
+		}	
+	
 	}

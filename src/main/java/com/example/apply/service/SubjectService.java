@@ -5,14 +5,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.example.apply.dto.QnaDto;
 import com.example.apply.dto.SubjectDto;
 import com.example.apply.dto.SubjectSearchDto;
-import com.example.apply.entity.Member;
-import com.example.apply.entity.Qna;
 import com.example.apply.entity.Subject;
 import com.example.apply.repository.SubjectRepository;
-import com.example.apply.repository.SubjectRepositoryCustom;
 
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -47,5 +43,14 @@ public class SubjectService {
 			
 		}
 	 
-	
+	//수정 내용 저장하기
+	 public Subject updateSubject(Long subjectId,SubjectDto subjectDto) {
+			
+		 Subject subject = subjectRepository.findById(subjectId).orElseThrow(EntityNotFoundException::new);
+			
+		 subject.updateSubject(subjectDto.getSubjectName(), subjectDto.getSubjectStartDate(),
+				 subjectDto.getSubjectEndDate(),subjectDto.getSubjectDetail(),subjectDto.getSubjectTo());
+			
+			return subject;
+		}
 }
