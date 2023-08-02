@@ -19,13 +19,13 @@
 
 	<div class = "d-flex justify-content-center">
 		<!-- 반복 Start -->
-		<div class="card" style="width: 18rem;" th:each="qna : ${subjects}">
+		<div class="card" style="width: 18rem;" th:each="subject : ${subjects}">
 			<img th:src="@{/img/EZEN.PNG}" class="card-img-top" alt="...">
 			<div class="card-body">
 				<h5 class="card-title" th:text="${subject.subjectName}"></h5>
-				<p class="card-text" th:text="${subject.content}"></p>
-				<a href="#" class="btn btn-outline-secondary"
-				onclick="pagemove1()">상세보기</a>
+				<p class="card-text" th:text="${subject.subjectDetail}"></p>
+				<a th:href="@{| /subject/detail/${subject.subjectId}|}" class="btn btn-outline-secondary d-flex justify-content-center"
+				>상세보기</a>
 			</div>
 		</div>
 		<!-- 반복 End -->
@@ -67,11 +67,8 @@
 <th:block layout:fragment="script">
 	<script th:inline="javascript">
 	
-	//상세보기 버튼
-	function pagemove1() {
+	//상세보기 버튼 > a태그로 넣음.
 
-		location.href = "";
-	}
 	
 	//과목등록 버튼
 	function pagemove2() {

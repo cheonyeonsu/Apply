@@ -9,6 +9,6 @@ import com.example.apply.dto.SubjectSearchDto;
 import com.example.apply.entity.Subject;
 
 public interface SubjectRepository extends JpaRepository<Subject,Long>, SubjectRepositoryCustom {
-	 Page<SubjectDto> getSubjectPage(SubjectSearchDto subjectSearchDto,Pageable pageable);
+	 Page<Subject> getSubjectPage(SubjectSearchDto subjectSearchDto,Pageable pageable);
   // Page<SubjectDto> subjectPage = subjectRepository.getSubjectPage(pageable); 
 }

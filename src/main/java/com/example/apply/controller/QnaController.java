@@ -57,10 +57,13 @@ public class QnaController {
 	 @PostMapping(value = "/qna/regist") 
 	 public String addRegist(@Valid QnaDto qnaDto, Principal principal) { 
 		 											//Principal:현재 인증된 사용자를 나타내는 인터페이스 
-		 String id =  principal.getName();
+		 String id =  principal.getName(); //로그인한 아이디 받아옴
 	 
-	 try { qnaService.saveQna(qnaDto,id); } catch (Exception e) {
-	 e.printStackTrace(); }
+			 try { 
+				 qnaService.saveQna(qnaDto,id);
+			 } catch (Exception e) {
+				 e.printStackTrace(); 
+			 }
 	 
 	 return "redirect:/qna/list"; }
 	 

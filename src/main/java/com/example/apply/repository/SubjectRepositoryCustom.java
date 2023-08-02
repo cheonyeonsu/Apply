@@ -5,7 +5,8 @@ import org.springframework.data.domain.Pageable;
 
 import com.example.apply.dto.SubjectDto;
 import com.example.apply.dto.SubjectSearchDto;
+import com.example.apply.entity.Subject;
 
 public interface SubjectRepositoryCustom {
-	Page<SubjectDto> getSubjectPage(SubjectSearchDto subjectSearchDto, Pageable pageable);
+	Page<Subject> getSubjectPage(SubjectSearchDto subjectSearchDto, Pageable pageable);
 }

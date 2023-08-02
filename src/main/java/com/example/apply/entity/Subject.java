@@ -43,9 +43,10 @@ public class Subject {
 	@Column
 	private int subjectTo; //수강 가능 인원
 	
-	//subject 엔티티 수정
+	
 	public void updateSubject(SubjectDto subjectDto) {
 		this.subjectName = subjectDto.getSubjectName();
+		//string - >localdatetime으로 바꾸는 방법
 		this.subjectStartDate = subjectDto.getSubjectStartDate();
 		this.subjectEndDate = subjectDto.getSubjectEndDate();
 		this.subjectDetail = subjectDto.getSubjectDetail();

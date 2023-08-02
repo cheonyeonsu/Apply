@@ -12,6 +12,7 @@ import com.example.apply.dto.QSubjectDto;
 import com.example.apply.dto.SubjectDto;
 import com.example.apply.dto.SubjectSearchDto;
 import com.example.apply.entity.QSubject;
+import com.example.apply.entity.Subject;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.core.types.dsl.Wildcard;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -26,8 +27,9 @@ public class SubjectRepositoryCustomImpl implements SubjectRepositoryCustom {
 	public SubjectRepositoryCustomImpl(EntityManager em) {
 		this.queryFactory = new JPAQueryFactory(em);
 	}
-
+ 
 	// 현재 날짜로부터 이전날짜를 구해주는 메소드 <날짜 검색>
+	
 	private BooleanExpression regDtsAfter(String searchDateType) {
 
 		LocalDateTime dateTime = LocalDateTime.now(); // 현재 날짜, 시간
@@ -45,14 +47,14 @@ public class SubjectRepositoryCustomImpl implements SubjectRepositoryCustom {
 
 		return QSubject.subject.subjectStartDate.after(dateTime); // Q객체 리턴
 
-	}
+	} 
 
 	private BooleanExpression subjectNmLike(String searchQuery) {
 		return StringUtils.isEmpty(searchQuery) ? null : QSubject.subject.subjectName.like("%" + searchQuery + "%");
 	}
 
 	@Override
-	public Page<SubjectDto> getSubjectPage(SubjectSearchDto subjectSearchDto,Pageable pageable) {
+	public Page<Subject> getSubjectPage(SubjectSearchDto subjectSearchDto,Pageable pageable) {
 		
 		//Q클래스 안나올 때는 Debug as clean/install
 		
@@ -60,15 +62,8 @@ public class SubjectRepositoryCustomImpl implements SubjectRepositoryCustom {
 		
 		QSubject subject = QSubject.subject;
 
-	  List<SubjectDto> content = queryFactory.select(
-				  new QSubjectDto(
-						  subject.subjectId, 
-						  subject.subjectName,
-						  subject.subjectStartDate, 
-						  subject.subjectEndDate, 
-						  subject.subjectDetail, 
-						  subject.subjectTo))
-				  .from(subject)
+	  List<Subject> content = queryFactory
+			  .selectFrom(QSubject.subject)
 				  .where(regDtsAfter(subjectSearchDto.getSearchDateType()),
 					  subjectNmLike(subjectSearchDto.getSearchQuery()))
 				  .orderBy(subject.subjectId.desc())

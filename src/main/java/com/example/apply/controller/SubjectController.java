@@ -1,5 +1,7 @@
 package com.example.apply.controller;
 
+
+
 import java.security.Principal;
 import java.util.Optional;
 
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.apply.dto.SubjectDto;
 import com.example.apply.dto.SubjectSearchDto;
+import com.example.apply.entity.Subject;
 import com.example.apply.service.SubjectService;
 
 import jakarta.validation.Valid;
@@ -29,7 +32,7 @@ public class SubjectController {
 	@GetMapping(value={"/subject/list", "/subject/list/{page}"})
 	public String subjectList(Model model, SubjectSearchDto subjectSearchDto, @PathVariable("page") Optional<Integer> page ) {
 		Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 5); 
-		Page<SubjectDto> subjectPage = subjectService.getSubjectPage(subjectSearchDto, pageable);
+		Page<Subject> subjectPage = subjectService.getSubjectPage(subjectSearchDto, pageable);
 		
 		model.addAttribute("subjects", subjectPage); 
 		model.addAttribute("maxPage", 5);
@@ -43,19 +46,40 @@ public class SubjectController {
 		return "subject/subjectRegist";
 	}
 	
-	//과목 등록하기
+	//과목 등록하기 : 과목 등록 요청이 오면 saveSubject 메서드를 호출하여 과목을 저장
 	@PostMapping(value = "/subject/regist")
 	public String addSubject(@Valid SubjectDto subjectDto, Principal principal) {
 		
-		String id =  principal.getName();
+		 //subjectDto.setSubjectStartDateStr(subjectDto.getSubjectStartDateStr().toString());
+	     //subjectDto.setSubjectEndDateStr(subjectDto.getSubjectEndDateStr().toString());
 		
 		try {
-			subjectService.saveSubject(subjectDto,id);
+			subjectService.saveSubject(subjectDto);
 		} catch (Exception e) {
 			 e.printStackTrace();
 		}
 		
-		return "redirect:subject/list"; //등록한 과목을 리스트 화면으로 돌아가 보여줌. 
+		return "redirect:/subject/list"; //등록한 과목을 리스트 화면으로 돌아가 보여줌. 
 	}
 	
-}
+	//등록한 과목 보여주기
+	@GetMapping(value = { "/subject/detail", "/subject/detail/{subjectId}" })
+	public String subjectDetail(@PathVariable(name = "subjectId") Long subjectId, Model model) {
+		Subject subject = subjectService.getDetailPage(subjectId);
+
+		model.addAttribute("subject", subject);
+		
+		return "subject/subjectDetail";
+		}
+	
+	//수정화면 보여주기
+	@GetMapping(value = { "/subject/edit", "/subject/edit/{subjectId}" })
+	public String subjectEidt(@PathVariable(name = "subjectId") Long subjectId, Model model) {
+		Subject subject = subjectService.getDetailPage(subjectId);
+
+		model.addAttribute("subject", subject);
+		
+		return "subject/subjectEdit";
+		}
+	
+	}
