@@ -92,4 +92,5 @@ public class SubjectController {
 			return "redirect:/subject/detail/" + subjectId;
 		}	
 	
+	//게시글 삭제
 	}
