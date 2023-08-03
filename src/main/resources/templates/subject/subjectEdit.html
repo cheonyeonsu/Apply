@@ -11,7 +11,7 @@ layout:decorate="~{layouts/layout1}">
 </th:block>
 
 <div layout:fragment="content" class="content">
-<form action="/subject/edit/{subjectId}" method="post" name="registForm" class="d-flex justify-content-center">
+<form th:action="@{|/subject/edit/{subject.subjectId}|}" method="post" name="registForm" class="d-flex justify-content-center">
 	<!-- 과목 등록 양식 -->
 	<div class = "class-detail">
 	<div>
