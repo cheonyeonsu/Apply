@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.apply.dto.SubjectDto;
 import com.example.apply.dto.SubjectSearchDto;
+import com.example.apply.entity.Qna;
 import com.example.apply.entity.Subject;
 import com.example.apply.repository.SubjectRepository;
 
@@ -50,6 +51,16 @@ public class SubjectService {
 			
 		 subject.updateSubject(subjectDto.getSubjectName(), subjectDto.getSubjectStartDate(),
 				 subjectDto.getSubjectEndDate(),subjectDto.getSubjectDetail(),subjectDto.getSubjectTo());
+			
+			return subject;
+		}
+	 
+	 //과목 삭제하기
+	 public Subject deleteSubject(Long subjectId) {
+			
+		 Subject subject = subjectRepository.findById(subjectId).orElseThrow(EntityNotFoundException::new);
+			
+		 subjectRepository.delete(subject);
 			
 			return subject;
 		}

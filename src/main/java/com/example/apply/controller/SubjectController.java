@@ -8,11 +8,15 @@ import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.apply.dto.SubjectDto;
 import com.example.apply.dto.SubjectSearchDto;
@@ -92,5 +96,11 @@ public class SubjectController {
 			return "redirect:/subject/detail/" + subjectId;
 		}	
 	
-	//게시글 삭제
+	// 게시글 삭제하기
+		@DeleteMapping("/subject/delete/{subjectId}")
+		public @ResponseBody ResponseEntity deleteSubject(@PathVariable("subjectId") Long subjectId, Principal principal) {
+			subjectService.deleteSubject(subjectId);
+
+			return new ResponseEntity<Long>(subjectId, HttpStatus.OK);
+		}
 	}
