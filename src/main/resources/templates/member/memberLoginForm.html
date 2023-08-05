@@ -4,7 +4,12 @@
 	layout:decorate="~{layouts/layout1}">
 
 <th:block layout:fragment="css">
-
+<style>
+/* 버튼 사이 간격 설정 */
+     .btn-spacing {
+        margin-right: 10px;
+    }
+</style>
 </th:block>
 
 <div layout:fragment="content" class="content">
@@ -31,12 +36,14 @@
 							</div>
 					<p th:if="${loginErrorMsg}" class="error"
 										th:text="${loginErrorMsg}"></p>
-							<!-- Submit Button-->
-					
-						<button class="btn btn-primary text-uppercase" id="submitButton" type="submit">로그인</button>
-						<button class="btn btn-primary text-uppercase" id="submitButton" type="button" onclick="locateRegist()">회원가입</button>
+				<!-- Submit Button-->
+				
+					<div class="d-flex justify-content-end">
+						<button class="btn btn-outline-secondary btn-spacing" id="submitButton" type="submit">로그인</button>
+						<button class="btn btn-outline-secondary" id="submitButton" type="button" onclick="locateRegist()">회원가입</button>
 						<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
-							
+					</div>
+
 						</form>
 					</div>
 				</div>

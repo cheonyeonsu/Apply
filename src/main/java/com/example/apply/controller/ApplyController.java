@@ -9,7 +9,7 @@ import lombok.RequiredArgsConstructor;
 @Controller
 @RequiredArgsConstructor
 public class ApplyController {
-
+	//수강신청
 	}
 	
 	

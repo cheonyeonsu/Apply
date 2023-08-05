@@ -27,12 +27,12 @@ public class MemberController {
 		return "member/qa";
 	}
 	
-	//로그인 화면
+	//로그인 화면 보여주기
 	@GetMapping(value="/members/login")
 	public String longinMember() {
 		return "member/memberLoginForm";
 	}
-	
+
 	//회원가입 화면 띄움
 	@GetMapping(value="/members/new")
 	public String memberForm(Model model) {
