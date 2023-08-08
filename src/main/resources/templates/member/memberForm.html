@@ -8,6 +8,10 @@
 	.fieldError{
 		color:#bd2130;
 	}
+	.btn {
+	border-radius: 5px;
+
+	}
 </style>
 </th:block>
 
@@ -51,10 +55,11 @@
 							</div>
 
 							<!-- Submit Button-->
-							
-							<button class="btn-primary text-uppercase" id="submitButton"
+							<div class = "d-flex justify-content-end">
+							<button class="btn btn-outline-secondary" id="submitButton"
 								type="submit">회원가입</button>
 							<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+							</div>
 
 						</form>
 					</div>
