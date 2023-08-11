@@ -14,27 +14,45 @@
 	margin-bottom: 20px;
 }
 
-.card {
-		margin-bottom: 40px; /* 카드 사이의 간격을 추가 */
+	.card {
+		margin-bottom: 40px; /* 카드와 페이지 버튼사이의 간격 추가 */
+		margin-left:20px;
+		margin-right:20px;
 	}
+	
+	.card-body > div {
+	margin:0;
+	padding : 0;
+	}
+	
+	.card-text{
+	margin:0 !important;
+	}	
+	
+	.h5{
+	margin:0;
+	margin-bottom:0;
+	padding: 0;
+	}
+	
 </style>
 </th:block>
 
 <div layout:fragment="content" class="board">
 
+<!-- div 3개로 나누면 내용 따라 크기 달라지는 것 사라짐 -->
 	<div class = "d-flex justify-content-center">
 		<!-- 반복 Start -->
 		<div class="card" style="width: 18rem;" th:each="subject : ${subjects}">
 			<img th:src="@{/img/EZEN.PNG}" class="card-img-top" alt="...">
 			<div class="card-body">
-				<h5 class="card-title" th:text="${subject.subjectName}"></h5>
-				<p class="card-text" th:text="${subject.subjectDetail}"></p>
-				<a th:href="@{| /subject/detail/${subject.subjectId}|}" class="btn btn-outline-secondary d-flex justify-content-center"
-				>상세보기</a>
+				<div style="height:50px;"><h5 class="card-title" th:text="${subject.subjectName}"></h5></div>
+				<div style="height:80px;"><p class="card-text" th:text="${subject.subjectDetail}"></p></div>
+				<div style="height:70px;"><a th:href="@{| /subject/detail/${subject.subjectId}|}" class="btn btn-outline-secondary d-flex justify-content-center"
+				>상세보기</a></div>
 			</div>
 		</div>
 		<!-- 반복 End -->
-
 	</div> 
 		<div
 			th:with="start=${(subjects.number/maxPage)*maxPage + 1}, end=(${(subjects.totalPages == 0) ? 1 : (start + (maxPage - 1) < subjects.totalPages ? start + (maxPage - 1) : subjects.totalPages)})">
