@@ -4,6 +4,10 @@ layout:decorate="~{layouts/layout1}">
 
 <th:block layout:fragment="css">
 <style>
+.table {
+	width: 900px;
+	margin: 0 auto;
+}
 </style>
 </th:block>
 
@@ -33,6 +37,32 @@ layout:decorate="~{layouts/layout1}">
 			</tbody>
 		</table>
 
+			<!-- 페이징 <nav aria-label="Page navigation example"
+			class="d-flex justify-content-center"
+			th:with="start=${(lists.number/maxPage)*maxPage + 1}, 
+		end=(${(lists.totalPages == 0) ? 1 : (start + (maxPage - 1) < lists.totalPages ? start + (maxPage - 1) : lists.totalPages)})">
+			<ul class="pagination">
+
+				<li class="page-item"
+					th:classappend="${lists.number eq 0}?'disabled':''"><a
+					th:href="@{'/schedule/list/' + ${lists.number-1}}" class="page-link"
+					href="#" aria-label="Previous"> <span aria-hidden="true">이전</span>
+				</a></li>
+
+					<li class="page-list"
+					th:each="page: ${#numbers.sequence(start, end)}"
+					th:classappend="${lists.number eq page-1}?'active':''"><a
+					th:href="@{'/schedule/list/' + ${page-1}}" th:inline="text"
+					class="page-link">[[${page}]]</a></li>
+
+				<li class="page-list"
+					th:classappend="${lists.number+1 ge lists.totalPages}?'disabled':''"><a
+					th:href="@{'/schedule/list/' + ${lists.number+1}}" aria-label='Next'
+					class="page-link"> <span aria-hidden='true'>다음</span>
+				</a></li>
+			</ul>
+		</nav>  -->
+			
 </div>
 
 <th:block layout:fragment="script">
