@@ -82,9 +82,9 @@ public class QnaController {
 	@GetMapping(value = { "/qna/modify", "/qna/modify/{id}" })
 	public String edit(@PathVariable(name = "id") Long id, Model model) {
 		Qna qna = qnaService.getDetailPage(id);
-
-		model.addAttribute("qnaDto", new QnaDto());
-		model.addAttribute("qna", qna);
+		
+		model.addAttribute("qnaDto", new QnaDto());//빈 QnaDto 객체를 모델에 추가
+		model.addAttribute("qna", qna);//가져온 Q&A 게시물 정보를 모델에 추가
 
 		return "qna/qnaEdit";
 	}
