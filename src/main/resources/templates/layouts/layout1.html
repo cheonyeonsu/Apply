@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-<title>Apply</title>
+<title th:text="${pageTitle}">Apply</title> <!-- 제목, 부제목을 위한 타임리프 변수 추가 -->
 <link rel="icon" type="image/x-icon" th:href="@{assets/favicon.ico}" />
 <!-- Font Awesome icons (free version)-->
 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
@@ -27,7 +27,7 @@
 <body>
 	<div class="site-wrap">
 		<div th:replace="fragments/header::header"></div>
-		<div layout:fragment="content" class="content"></div>
+		<div layout:fragment="content" class="content"></div> <!-- 페이지의 고유한 컨텐츠 -->
 		<div th:replace="fragments/footer::footer"></div>
 	</div>
 
