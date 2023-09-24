@@ -19,6 +19,9 @@ public class ScheduleController {
 	
 	@GetMapping(value="/schedule/list")
 	public String subjectList(Model model, ScheduleDto scheduleDto) {
+		model.addAttribute("headerBigMsg","SCHEDULE");
+		model.addAttribute("imgurl","/img/TimeTable.jpg");
+		model.addAttribute("headerMsg","수강신청 한 과목을 확인하세요.");
 		/*
 		 * List<Subject> subjects = subjectService.getAllSubjects();
 		 * model.addAttribute("subjects", subjects);

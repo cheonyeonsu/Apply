@@ -38,6 +38,9 @@ public class SubjectController {
 		Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 5); 
 		Page<Subject> subjectPage = subjectService.getSubjectPage(subjectSearchDto, pageable);
 		
+		model.addAttribute("headerBigMsg","SUBJECT");
+		model.addAttribute("imgurl", "/img/Click.jpg"); /* 이미지 */
+		model.addAttribute("headerMsg","수강신청 페이지입니다.");
 		model.addAttribute("subjects", subjectPage); 
 		model.addAttribute("maxPage", 5);
 		

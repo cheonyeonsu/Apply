@@ -40,6 +40,9 @@ public class QnaController {
 
 		// 숫자 5를 maxPage라는 이름으로 view에 보낸다
 		// model.addAttribute(String key, Object value);
+		model.addAttribute("headerBigMsg","QNA PAGE");
+		model.addAttribute("imgurl","/img/QNA.jpg");
+		model.addAttribute("headerMsg","QNA 페이지 입니다.");
 		model.addAttribute("lists", list);
 		model.addAttribute("maxPage", 5);
 
