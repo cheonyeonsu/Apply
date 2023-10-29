@@ -51,4 +51,10 @@ public class MemberService implements UserDetailsService {
 				.roles(member.getRole().toString())
 				.build();
 	}
+	
+	public Member findMemberByEmail(String email) {
+		Member member = memberRepository.findByUserId(email);
+		
+		return member;
+	}
 }

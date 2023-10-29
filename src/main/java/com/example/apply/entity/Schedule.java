@@ -33,16 +33,10 @@ public class Schedule {
     @JoinColumn(name = "subject_id", nullable = false)
     private Subject subject;
 
-    @Column(nullable = false)
-    private LocalDateTime registrationDate;
-
-    @Column(nullable = false)
-    private String subjectName;
-
-    @Column(nullable = false)
-    private LocalDateTime subjectStartDate;
-
-    @Column(nullable = false)
-    private LocalDateTime subjectEndDate;
+    @ManyToOne
+    @JoinColumn(name = "member_id", nullable = false)
+    private Member member;
+    
+   
     
 }

@@ -7,78 +7,75 @@
 <meta name="_csrf_header" th:content="${_csrf.headerName}" />
 </head>
 <th:block layout:fragment="css">
-<style>
-	.btn {
+	<style>
+.btn {
 	border-radius: 5px;
 	margin-right: 10px;
 	margin-bottom: 50px;
+}
 </style>
 </th:block>
 
 <head>
-	<meta name="_csrf" th:content="${_csrf.token}" />
-	<meta name="_csrf_header" th:content="${_csrf.headerName}" />
+<meta name="_csrf" th:content="${_csrf.token}" />
+<meta name="_csrf_header" th:content="${_csrf.headerName}" />
 </head>
 
 <div layout:fragment="content" class="content">
-<div class="d-flex justify-content-center">
-	<!-- 과목 등록 양식 -->
-	<div class = "class-detail">
-	<div>
-	<div class="d-flex justify-content-between">
-		<dl >
-			<dt>과목명</dt>
-			<dd th:text="${subject.subjectName}">
-			</dd>
-		</dl>
-		<dl>
-			<dt>수강 가능 인원</dt>
-			 <dd>
-			 <!-- th:text를 사용할 때 해당 태그 안의 내용은 순수한 텍스트로 간주.
+	<div class="d-flex justify-content-center">
+		<!-- 과목 등록 양식 -->
+		<div class="class-detail">
+			<div>
+				<div class="d-flex justify-content-between">
+					<dl>
+						<dt>과목명</dt>
+						<dd th:text="${subject.subjectName}"></dd>
+					</dl>
+					<dl>
+						<dt>수강 가능 인원</dt>
+						<dd>
+							<!-- th:text를 사용할 때 해당 태그 안의 내용은 순수한 텍스트로 간주.
 			 span 안에 th:text 써줘야 '명'나옴 -->
-        	<span th:text="${subject.subjectTo}"></span> <span>명</span>
-   			 </dd>
-		</dl>
-	</div>
-	
-	<!-- 입력한 값을 가져올 때는 th:value가 아니라 th:text -->
-	<div class="d-flex justify-content-between">
-		<dl>
-			<dt>개강일</dt>
-			<dd th:text="${subject.subjectStartDate}">
-			</dd>
-		</dl>
-		
-		<dl>
-			<dt>종강일</dt>
-			<dd th:text="${subject.subjectEndDate}">
-			</dd>
-		</dl>
-	</div>
-	
-	<dl>
-		<dt>내&nbsp;&nbsp;&nbsp;&nbsp;용</dt>
-		<dd th:text="${subject.subjectDetail}">
-		</dd>
-	</dl>
+							<span th:text="${subject.subjectTo}"></span> <span>명</span>
+						</dd>
+					</dl>
+				</div>
 
-	<div class="d-flex justify-content-end">
-				<!-- 사용자 -->
-				<button class="btn btn-outline-secondary" onclick="goApply()">신청하기</button>
-				<!-- 관리자 권한 -->
-				<button class="btn btn-outline-secondary" onclick="goEdit()">수정하기</button>
-				<button class="btn btn-outline-secondary" onclick="dropSubject()">삭제하기</button>	
+				<!-- 입력한 값을 가져올 때는 th:value가 아니라 th:text -->
+				<div class="d-flex justify-content-between">
+					<dl>
+						<dt>개강일</dt>
+						<dd th:text="${subject.subjectStartDate}"></dd>
+					</dl>
+
+					<dl>
+						<dt>종강일</dt>
+						<dd th:text="${subject.subjectEndDate}"></dd>
+					</dl>
+				</div>
+
+				<dl>
+					<dt>내&nbsp;&nbsp;&nbsp;&nbsp;용</dt>
+					<dd th:text="${subject.subjectDetail}"></dd>
+				</dl>
+
+				<div class="d-flex justify-content-end">
+					<!-- 사용자 -->
+					<button class="btn btn-outline-secondary" onclick="goApply()">신청하기</button>
+					<!-- 관리자 권한 -->
+					<button class="btn btn-outline-secondary" onclick="goEdit()">수정하기</button>
+					<button class="btn btn-outline-secondary" onclick="dropSubject()">삭제하기</button>
+				</div>
+			</div>
+			<!-- 과목 등록 양식 -->
+		</div>
 	</div>
-	</div>
-	<!-- 과목 등록 양식 -->
-</div>
-</div>
 
 
 </div>
 
 <th:block layout:fragment="script">
-<script th:inline="javascript">
+	<script th:inline="javascript">
 let id = [[${subject.subjectId}]];
 function goEdit() {
 		location.href= '/subject/edit/' + id;
@@ -119,14 +116,57 @@ function dropSubject() {
 }
 
 function goApply(){
-	const confirmation = confirm("수강신청을 완료하시겠습니까?");
-    if (confirmation) {
-        alert("수강신청이 완료되었습니다.");
-    }
-	}
+	const cancelConf = confirm("수강신청 하시겠습니까?");
+	if(!cancelConf) return; //취소버튼 누르면
+	
+	var token = $("meta[name='_csrf']").attr("content");
+	var header = $("meta[name='_csrf_header']").attr("content");
+	var subjectId =[[${subject.subjectId}]] 
+	//request URL
+	var url = "/subject/insert";
+	
+	//서버로 보내줄 데이터(반드시 JSON -> string 타입으로 바꿔줘야한다)
+	var paramData = {
+		subjectId: subjectId	
+	};
+	var param = JSON.stringify(paramData);
+	
+	$.ajax({
+		url : url, //request URL
+		type : "POST", //전송방식
+		contentType : "application/json",
+		data : param,
+		beforeSend : function(xhr) {
+			//데이터를 전송하기 전에 헤더에 csrf 값을 설정
+			xhr.setRequestHeader(header, token);
+		},
+		dataType : "json",
+		cache : false,
+		success : function(result, status) {
+			
+			alert("수강신청이 완료되었습니다.");
+			//주문취소 후에 원래 페이지로 이동시켜준다.
+			location.href = '/schedule/list';
+		},
+		error : function(jqXHR, status, error) {
+			if(jqXHR.status == '401') {
+				alert('로그인 후 이용해주세요.');
+				window.location.reload();
+			} else {
+				alert(jqXHR.responseText);
+			}
+		}
+	});
+
+     }
+
+    	
+    
+
+
 
 
 </script>
-</th:block> 
+</th:block>
 
 </html>

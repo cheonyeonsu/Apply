@@ -23,15 +23,15 @@ layout:decorate="~{layouts/layout1}">
 			</thead>
 			<tbody>
 				<!-- 반복 Start -->
-				<tr th:each="qna,status:${lists}">
-					<th scope = "row" th:text = "${qna.id}"></th>
+				<tr th:each="schedule,status:${scheduleList}">
+					<th scope = "row" th:text = "${schedule.subject.subjectName}"></th>
 					<td>
 					<!-- 게시글 제목 링크로 만들어줌 -->
-					<a th:href = "@{/qna/detail/{id}(id=${qna.id})}"> 
-						<span th:text="${qna.title}"> </span></a>
+					
+						<span th:text="${schedule.subject.subjectStartDate}"> </span>
 					</td>
-					<td th:text = "${qna.date}"></td>
-					<td th:text = "${qna.member.userId}"></td>
+					<td th:text = ${schedule.subject.subjectEndDate}></td>
+					
 				</tr>
 				<!-- 반복 End -->
 			</tbody>

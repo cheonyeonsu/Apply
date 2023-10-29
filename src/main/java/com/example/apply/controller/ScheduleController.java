@@ -1,11 +1,21 @@
 package com.example.apply.controller;
 
 
+import java.security.Principal;
+import java.util.Optional;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import com.example.apply.dto.ScheduleDto;
+import com.example.apply.entity.Member;
+import com.example.apply.entity.Schedule;
+import com.example.apply.service.MemberService;
 import com.example.apply.service.ScheduleService;
 
 import lombok.RequiredArgsConstructor;
@@ -16,16 +26,20 @@ public class ScheduleController {
 
 	//화면 띄우기
 	private final ScheduleService scheduleService;
+	private final MemberService memberService;
 	
-	@GetMapping(value="/schedule/list")
-	public String subjectList(Model model, ScheduleDto scheduleDto) {
+	@GetMapping(value= {"/schedule/list","/schedule/list/{page}"})
+	public String subjectList(Model model, ScheduleDto scheduleDto,@PathVariable("page") Optional<Integer> page,Principal principal) {
+Member member = memberService.findMemberByEmail(principal.getName());
+		
+		Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 5);
+		Page<Schedule> scheduleList = scheduleService.getSchedulePage(pageable, member);
+		
+		model.addAttribute("scheduleList",scheduleList);
 		model.addAttribute("headerBigMsg","SCHEDULE");
 		model.addAttribute("imgurl","/img/TimeTable.jpg");
 		model.addAttribute("headerMsg","수강신청 한 과목을 확인하세요.");
-		/*
-		 * List<Subject> subjects = subjectService.getAllSubjects();
-		 * model.addAttribute("subjects", subjects);
-		 */
+
 		return "schedule/scheduleList"; // 리턴할 파일 이름
 	}
 
